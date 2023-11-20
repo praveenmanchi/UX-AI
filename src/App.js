@@ -71,30 +71,32 @@ function App() {
     if (!searchValue.trim()) {
       return;
     }
+  
     try {
-      const response = await fetch('YOUR_ASSISTANTS_API_ENDPOINT', {
+      const response = await fetch('https://api.openai.com/v1/engines/text-davinci-003/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer YOUR_API_KEY`,
+          'Authorization': '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', // Replace with your API key
         },
         body: JSON.stringify({
           prompt: searchValue,
           max_tokens: 100,
         }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to fetch');
       }
-
+  
       const result = await response.json();
       console.log('POST request result:', result);
-      setAssistantResponse(result);
+      setAssistantResponse(result.choices[0].text.trim());
     } catch (error) {
       console.error('Error making POST request:', error.message);
     }
   };
+  
 
   // useEffect(() => {
   //   fetchAssistantResponse(); // Call fetchAssistantResponse on component mount
@@ -222,39 +224,39 @@ function App() {
         </Grid>
       </Grid>
       <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <DialogContent>
-  <Grid
-    container
-    style={{
-      backgroundColor: 'rgba(195, 195, 195, 0.14)',
-      padding: '70px 32px 70px 18px',
-      borderRadius: '12px',
-    }}
-  >
-    <Typography gutterBottom sx={{ textAlign: 'center' }}>
-      {assistantResponse || 'Ask me about UX...'}
-    </Typography>
-  </Grid>
-</DialogContent>
-        <DialogActions sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            autoFocus
-            onClick={handleClose}
-            variant="contained"
-            sx={{
-              background: '#1b1b1b',
-              borderRadius: '24px',
-              fontSize: '14px',
-            }}
-          >
-            Ask again
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
+  onClose={handleClose}
+  aria-labelledby="customized-dialog-title"
+  open={open}
+>
+  <DialogContent>
+    <Grid
+      container
+      style={{
+        backgroundColor: 'rgba(195, 195, 195, 0.14)',
+        padding: '70px 32px 70px 18px',
+        borderRadius: '12px',
+      }}
+    >
+      <Typography gutterBottom sx={{ textAlign: 'center' }}>
+        {assistantResponse || 'Ask me about UX...'}
+      </Typography>
+    </Grid>
+  </DialogContent>
+  <DialogActions sx={{ display: 'flex', justifyContent: 'center' }}>
+    <Button
+      autoFocus
+      onClick={handleClose}
+      variant="contained"
+      sx={{
+        background: '#1b1b1b',
+        borderRadius: '24px',
+        fontSize: '14px',
+      }}
+    >
+      Ask again
+    </Button>
+  </DialogActions>
+</BootstrapDialog>
     </>
   );
 }
