@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import QuestionBox from './components/QuestionBox/QuestionBox';
 
@@ -96,9 +96,9 @@ function App() {
     }
   };
 
-  React.useEffect(() => {
-    fetchAssistantResponse(); // Call fetchAssistantResponse on component mount
-  }, []); // Empty dependency array to run only once on mount
+  // useEffect(() => {
+  //   fetchAssistantResponse(); // Call fetchAssistantResponse on component mount
+  // }, []); // Empty dependency array to run only once on mount
 
   return (
     <>
