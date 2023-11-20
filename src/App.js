@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import QuestionBox from './components/QuestionBox/QuestionBox';
 
@@ -17,11 +17,11 @@ const previousQuestions = [
   },
   {
     title:
-      'How to use lean UX in Project implimentation',
+      'How to use lean UX in Project implementation',
   },
   {
     title:
-      'what is mean by heuristic evaluation and how to use it',
+      'What is meant by heuristic evaluation and how to use it',
   },
 ];
 
@@ -40,8 +40,9 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function App() {
-  const [searchValue, setSearchValue] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [open, setOpen] = useState(false);
+  const [assistantResponse, setAssistantResponse] = useState('');
 
   const handleInputChange = (e) => {
     setSearchValue(e.target.value);
@@ -56,35 +57,32 @@ function App() {
   };
 
   const handleSearchButtonClick = () => {
-    fetchData();
+    fetchAssistantResponse(); // Call the function to fetch assistant response
     handleClickOpen();
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      fetchData();
+      fetchAssistantResponse(); // Call the function to fetch assistant response
     }
   };
 
-  const fetchData = React.useCallback(async () => {
+  const fetchAssistantResponse = async () => {
     if (!searchValue.trim()) {
       return;
     }
     try {
-      const response = await fetch(
-        'https://api.openai.com/v1/engines/text-davinci-003/completions',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${'rmEBLyJHFodtf3LjphNIT3BlbkFJlKOca9QF26VMv54zqwAd'}`,
-          },
-          body: JSON.stringify({
-            prompt: searchValue,
-            max_tokens: 100,
-          }),
-        }
-      );
+      const response = await fetch('YOUR_ASSISTANTS_API_ENDPOINT', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer YOUR_API_KEY`,
+        },
+        body: JSON.stringify({
+          prompt: searchValue,
+          max_tokens: 100,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error('Failed to fetch');
@@ -92,14 +90,15 @@ function App() {
 
       const result = await response.json();
       console.log('POST request result:', result);
+      setAssistantResponse(result);
     } catch (error) {
       console.error('Error making POST request:', error.message);
     }
-  }, [searchValue]);
+  };
 
   React.useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    fetchAssistantResponse(); // Call fetchAssistantResponse on component mount
+  }, []); // Empty dependency array to run only once on mount
 
   return (
     <>
@@ -228,60 +227,19 @@ function App() {
         open={open}
       >
         <DialogContent>
-          <Grid
-            container
-            style={{
-              backgroundColor: 'rgba(195, 195, 195, 0.14)',
-              padding: '70px 32px 70px 18px',
-              borderRadius: '12px',
-            }}
-          >
-            <Typography gutterBottom sx={{ textAlign: 'center' }}>
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-              Ask me about UX Ask me about UX Ask me about UX Ask me about UX
-            </Typography>
-          </Grid>
-        </DialogContent>
+  <Grid
+    container
+    style={{
+      backgroundColor: 'rgba(195, 195, 195, 0.14)',
+      padding: '70px 32px 70px 18px',
+      borderRadius: '12px',
+    }}
+  >
+    <Typography gutterBottom sx={{ textAlign: 'center' }}>
+      {assistantResponse || 'Ask me about UX...'}
+    </Typography>
+  </Grid>
+</DialogContent>
         <DialogActions sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             autoFocus
