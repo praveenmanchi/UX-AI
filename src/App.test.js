@@ -9,7 +9,7 @@ test('renders UX AI logo', () => {
 
 test('renders beta version text', () => {
   render(<App />);
-  const versionElement = screen.getByText('Beta V.8');
+  const versionElement = screen.getByText('Beta V.02');
   expect(versionElement).toBeInTheDocument();
 });
 
