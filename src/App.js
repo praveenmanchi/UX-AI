@@ -40,7 +40,9 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function App() {
+  const [searchValue, setSearchValue] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,12 +50,57 @@ function App() {
   const handleClose = () => {
     setOpen(false);
   };
-  // const React.useEffect(() => {
 
-  //   return () => {
-  //     second
-  //   }
-  // }, [third])
+  const handleInputChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleSearchButtonClick = () => {
+    fetchData();
+    handleClickOpen();
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      fetchData();
+    }
+  };
+
+  const fetchData = async () => {
+    if (!searchValue.trim()) {
+      return;
+    }
+    try {
+      const response = await fetch(
+        'https://api.openai.com/v1/engines/text-davinci-003/completions',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${'rmEBLyJHFodtf3LjphNIT3BlbkFJlKOca9QF26VMv54zqwAd'}`,
+          },
+          body: JSON.stringify({
+            prompt: searchValue,
+            max_tokens: 100,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch');
+      }
+
+      const result = await response.json();
+      console.log('POST request result:', result);
+      setData(result);
+    } catch (error) {
+      console.error('Error making POST request:', error.message);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -101,10 +148,13 @@ function App() {
                   <input
                     placeholder="Ask me about UX "
                     className="input-field"
+                    value={searchValue}
+                    onChange={handleInputChange}
+                    onKeyPress={handleKeyPress}
                   />
                 </Grid>
                 <Grid item className="enter-icon-container">
-                  <IconButton onClick={handleClickOpen}>
+                  <IconButton onClick={handleSearchButtonClick}>
                     <SubdirectoryArrowLeftIcon
                       sx={{
                         color: 'white',

@@ -1,7 +1,16 @@
-/*
-test('renders learn react link', () => {
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders UX AI logo', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const logoElement = screen.getByAltText('i');
+  expect(logoElement).toBeInTheDocument();
 });
-*/
+
+test('renders beta version text', () => {
+  render(<App />);
+  const versionElement = screen.getByText('Beta V.8');
+  expect(versionElement).toBeInTheDocument();
+});
+
+// Modify or add additional tests as needed for specific elements or functionalities
