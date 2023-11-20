@@ -42,17 +42,17 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 function App() {
   const [searchValue, setSearchValue] = React.useState('');
   const [open, setOpen] = React.useState(false);
-  const [data, setData] = React.useState('');
+
+  const handleInputChange = (e) => {
+    setSearchValue(e.target.value);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleInputChange = (e) => {
-    setSearchValue(e.target.value);
   };
 
   const handleSearchButtonClick = () => {
@@ -66,7 +66,7 @@ function App() {
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = React.useCallback(async () => {
     if (!searchValue.trim()) {
       return;
     }
@@ -92,15 +92,14 @@ function App() {
 
       const result = await response.json();
       console.log('POST request result:', result);
-      setData(result);
     } catch (error) {
       console.error('Error making POST request:', error.message);
     }
-  };
+  }, [searchValue]);
 
   React.useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <>
