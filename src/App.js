@@ -109,7 +109,24 @@ function App() {
           height: '100%',
         }}
       >
-        {/* ... other Grid items and components ... */}
+        {/* Grid item for the header */}
+        <Grid item xs={12}>
+          {/* Grid container for header content */}
+          <Grid container justifyContent={'space-between'}>
+            {/* Logo */}
+            <Grid item>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/ux-ai-logo.svg`}
+                alt="i"
+              />
+            </Grid>
+            {/* Version */}
+            <Grid item className="version-style">
+              Beta V.02
+            </Grid>
+          </Grid>
+        </Grid>
+        {/* Grid item for the main content */}
 
         <Grid
           item
