@@ -60,3 +60,4 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9D66BCE0B0874E2586CCCAD25AABAFCA }}
           package: ${{ github.workspace }}/release.zip
+      - task: PublishBuildArtifacts@1
