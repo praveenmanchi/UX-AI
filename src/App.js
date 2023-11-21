@@ -9,6 +9,7 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
+import { inject } from '@vercel/analytics';
 
 // Importing CSS file and a custom component
 import './App.css';
@@ -79,6 +80,8 @@ function App() {
     }
   };
 
+  
+
   // Function to fetch assistant response from OpenAI's API
   const fetchAssistantResponse = async () => {
     if (!searchValue.trim()) {
@@ -109,6 +112,9 @@ function App() {
       console.error('Error making POST request:', error.message);
     }
   };
+    // Call inject function to initiate analytics tracking
+    inject();
+
   
   // The return statement contains JSX for the application layout
   return (
