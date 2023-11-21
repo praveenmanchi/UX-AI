@@ -73,11 +73,11 @@ function App() {
     }
   
     try {
-      const response = await fetch('https://api.openai.com/v1/engines/text-davinci-003/completions', {
+      const response = await fetch('https://api.openai.com/v1/assistants', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': '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', // Replace with your API key
+          'Authorization': 'sk-Uugj3kr4wInXFvb4fPvT3BIbkFJ3tdnjzu5WBPZ789iyfVY', // Replace with your API key
         },
         body: JSON.stringify({
           prompt: searchValue,
