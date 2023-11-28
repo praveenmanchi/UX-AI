@@ -122,7 +122,7 @@ function App() {
             </Grid>
             {/* Version */}
             <Grid item className="version-style">
-              Beta V.02
+              Beta V0.06
             </Grid>
           </Grid>
         </Grid>
@@ -180,7 +180,7 @@ function App() {
             {/* Text informing about model training */}
             <Grid item xs={4}>
               <Typography sx={{ textAlign: 'center', marginTop: '100px' }}>
-              We are feeding, fine-tuning, and training our model. A little misleading information is to be expected.
+              We are feeding, fine-tuning, and training our model. A little or full contain has misleading information is to be expected.
               </Typography>
             </Grid>
           </Grid>
