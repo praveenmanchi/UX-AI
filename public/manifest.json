@@ -1,25 +1,43 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "UXAI",
+  "name": "UXAI - AI Integrated Design Platform",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "images/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "images/ux-ai-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "description": "UXAI - A platform integrating artificial intelligence (AI) to assist UX/UI designers with their queries.",
+  "social_media": {
+    "facebook": {
+      "og:type": "website",
+      "og:url": "https://uxai.designboard.club/",
+      "og:title": "UXAI - AI Integrated Design Platform",
+      "og:description": "Discover UXAI, an AI-integrated platform designed to assist UX/UI designers in answering their design-related queries.",
+      "og:image": "https://ycsfwdainpwgmgsjqppv.supabase.co/storage/v1/object/public/OG-images/og-image.svg"
+    },
+    "twitter": {
+      "twitter:card": "summary_large_image",
+      "twitter:url": "https://uxai.designboard.club/",
+      "twitter:title": "UXAI - AI Integrated Design Platform",
+      "twitter:description": "Discover UXAI, an AI-integrated platform designed to assist UX/UI designers in answering their design-related queries.",
+      "twitter:image": "https://ycsfwdainpwgmgsjqppv.supabase.co/storage/v1/object/public/OG-images/og-image.svg"
+    },
+    "linkedin": {
+      "og:title": "UXAI - AI Integrated Design Platform",
+      "og:description": "Discover UXAI, an AI-integrated platform designed to assist UX/UI designers in answering their design-related queries.",
+      "og:image": "https://ycsfwdainpwgmgsjqppv.supabase.co/storage/v1/object/public/OG-images/og-image.svg",
+      "og:url": "https://uxai.designboard.club/"
+    }
+  }
 }
