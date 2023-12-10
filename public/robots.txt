@@ -1,3 +1,14 @@
-# https://www.robotstxt.org/robotstxt.html
+# Allow all bots to access everything
 User-agent: *
 Disallow:
+
+# Disallow a specific bot from a specific folder
+# User-agent: BadBot
+# Disallow: /private-folder/
+
+# Disallow all bots from a specific folder
+# Disallow: /no-bots/
+
+# Sitemap location
+Sitemap: https://uxai.designboard.club/sitemap.xml
+ 
