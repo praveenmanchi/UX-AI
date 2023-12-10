@@ -1,10 +1,11 @@
-import SubdirectoryArrowLeftIcon from '@mui/icons-material/SubdirectoryArrowLeft';
-import { Grid, IconButton, Button, Dialog, DialogActions, DialogContent, Link, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
+import { Grid, IconButton, Button, Dialog, DialogActions, DialogContent, Link, Typography } from '@mui/material';
+import SubdirectoryArrowLeftIcon from '@mui/icons-material/SubdirectoryArrowLeft';
+import { styled } from '@mui/material/styles';
 import './App.css';
 import QuestionBox from './components/QuestionBox/QuestionBox';
 import { inject } from '@vercel/analytics';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const previousQuestions = [
   {
@@ -98,8 +99,10 @@ function App() {
 
   inject();
 
+  inject();
+
   return (
-    <>
+    <div>
       <Grid
         container
         className="main-container"
@@ -127,7 +130,6 @@ function App() {
           </Grid>
         </Grid>
         {/* Grid item for the main content */}
-
         <Grid
           item
           xs={12}
@@ -152,7 +154,7 @@ function App() {
                     className="input-field"
                     value={searchValue}
                     onChange={handleInputChange}
-                    onKeyPress={handleKeyPress}
+                    onKeyDown={handleKeyPress}
                   />
                 </Grid>
                 <Grid item className="enter-icon-container">
@@ -171,8 +173,10 @@ function App() {
               >
                 {previousQuestions.map((eachCard, idx) => (
                   <Grid item xs={12} md={3.5} key={idx}>
-                    {/* Custom component to display previous questions */}
-                    <QuestionBox data={eachCard} />
+                    <QuestionBox 
+                      data={eachCard} 
+                      onClick={() => setSearchValue(eachCard.title)}
+                    />
                   </Grid>
                 ))}
               </Grid>
@@ -180,7 +184,7 @@ function App() {
             {/* Text informing about model training */}
             <Grid item xs={4}>
               <Typography sx={{ textAlign: 'center', marginTop: '100px' }}>
-              We are feeding, fine-tuning, and training our model. A little or full contain has misleading information is to be expected.
+                We are feeding, fine-tuning, and training our model. A little or full contain has misleading information is to be expected.
               </Typography>
             </Grid>
           </Grid>
@@ -259,7 +263,8 @@ function App() {
           </Button>
         </DialogActions>
       </BootstrapDialog>
-    </>
+      <SpeedInsights />
+    </div>
   );
 }
 
